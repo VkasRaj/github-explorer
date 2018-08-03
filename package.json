@@ -1,0 +1,42 @@
+{
+	"name": "github-explorer",
+	"version": "1.0.0",
+	"description": "",
+	"main": "server.js",
+	"engines": {
+		"node": "^8.11.3",
+		"npm": "^6.2.0"
+	},
+	"dependencies": {
+		"cookie-parser": "^1.4.3",
+		"body-parser": "^1.18.3",
+		"express": "^4.16.3",
+		"jsonwebtoken": "^8.3.0",
+		"mongoose": "^5.2.6"
+	},
+	"devDependencies": {
+		"concurrently": "^3.6.1",
+		"nodemon": "^1.18.3"
+	},
+	"scripts": {
+		"start": "node server.js",
+		"server": "nodemon server.js",
+		"client": "npm start --prefix client",
+		"dev": "concurrently --kill-others \"npm run server\" \"npm run client\""
+	},
+	"keywords": [
+		"react",
+		"redux",
+		"node",
+		"express",
+		"mongoDB",
+		"mongoose",
+		"auth",
+		"github",
+		"github-explorer",
+		"authentication",
+		"token"
+	],
+	"author": "",
+	"license": "ISC"
+}
