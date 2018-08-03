@@ -5,6 +5,9 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 const { MONGO_URI } = require("./server/config/keys/index");
 
+/* Express Middlewares */
+require("./server/middlewares/express")(app);
+
 /**
  * First create a folder name db in C:\mongodb\data\
  *
