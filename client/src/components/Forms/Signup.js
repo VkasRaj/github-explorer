@@ -1,16 +1,9 @@
 import React, { Component, Fragment } from "react";
-import {
-	TextField,
-	Button,
-	FormControl,
-	CircularProgress,
-	Paper,
-	Typography,
-	withStyles
-} from "@material-ui/core";
+import { withStyles } from "@material-ui/core";
 import { Form, Field, reduxForm } from "redux-form";
 
 import validate from "./config/validate";
+import { inputField, ErrorPaper, LoadingButton } from "./formControls";
 
 const styles = theme => {
 	const {
@@ -26,26 +19,6 @@ const styles = theme => {
 	};
 };
 class SignUp extends Component {
-	state = {
-		showPassword: false
-	};
-
-	inputField = ({ input, meta: { error, touched }, ...field }) => {
-		return (
-			<TextField
-				{...input}
-				{...field}
-				margin="normal"
-				error={touched && error ? true : false}
-				helperText={touched && error ? error : null}
-				InputLabelProps={{
-					shrink: true
-				}}
-				fullWidth
-			/>
-		);
-	};
-
 	render() {
 		const {
 			handleSubmit,
@@ -57,59 +30,35 @@ class SignUp extends Component {
 
 		return (
 			<Fragment>
-				{formError && (
-					<Paper
-						square={true}
-						classes={{
-							root: classes.errorPaper
-						}}
-						elevation={0}
-					>
-						<Typography
-							variant="caption"
-							color="inherit"
-							align="center"
-						>
-							{formError}
-						</Typography>
-					</Paper>
-				)}
+				<ErrorPaper
+					error={formError}
+					classes={{
+						root: classes.errorPaper
+					}}
+				/>
 				<Form onSubmit={handleSubmit} noValidate>
 					<Field
 						name="name"
 						label="Name"
 						placeholder="John Doe"
 						type="text"
-						component={this.inputField}
+						component={inputField}
 					/>
 					<Field
 						name="email"
 						label="Email"
 						placeholder="johndoe@email.com"
 						type="email"
-						component={this.inputField}
+						component={inputField}
 					/>
 					<Field
 						name="password"
 						label="Password"
 						placeholder="I'll be our secret"
 						type="password"
-						component={this.inputField}
+						component={inputField}
 					/>
-					<FormControl margin="normal" fullWidth>
-						<Button
-							variant="raised"
-							type="Submit"
-							color="primary"
-							disabled={pristine || loading}
-						>
-							{loading ? (
-								<CircularProgress size={20} thickness={4} />
-							) : (
-								"Sign Up"
-							)}
-						</Button>
-					</FormControl>
+					<LoadingButton loading={loading} pristine={pristine} />
 				</Form>
 			</Fragment>
 		);
