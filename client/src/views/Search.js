@@ -1,8 +1,15 @@
 import React, { Component } from "react";
+import FormLayout from "../components/Forms/FormLayout";
+
+import SearchContainer from "../containers/Search";
 
 class Search extends Component {
 	render() {
-		return <div>Search</div>;
+		return (
+			<FormLayout>
+				<SearchContainer />
+			</FormLayout>
+		);
 	}
 }
 
