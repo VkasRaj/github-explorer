@@ -5,6 +5,9 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 const { MONGO_URI } = require("./server/config/keys/index");
 
+/* Routes Import */
+const user = require("./server/routes/user");
+
 /* Express Middlewares */
 require("./server/middlewares/express")(app);
 
@@ -29,3 +32,6 @@ mongoose
 app.listen(PORT, () => {
 	console.log(`Server is up on port: ${PORT}`);
 });
+
+/* Routes Registering */
+app.use("/api/user", user);
