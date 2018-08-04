@@ -1,3 +1,4 @@
+const path = require("path");
 const express = require("express");
 const mongoose = require("mongoose");
 const app = express();
@@ -35,3 +36,11 @@ app.listen(PORT, () => {
 
 /* Routes Registering */
 app.use("/api/user", user);
+
+/* Serving build files if production */
+if (process.env.NODE_ENV === "production") {
+	app.use(express.static(path.resolve(__dirname, "client/build")));
+	app.get("*", (req, res) =>
+		res.sendFile(path.resolve(__dirname, "client/build", "index.html"))
+	);
+}
