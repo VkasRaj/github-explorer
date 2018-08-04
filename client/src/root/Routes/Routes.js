@@ -2,10 +2,7 @@ import React, { Component } from "react";
 import { withRouter, Switch, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 
-import Home from "../../views/Home";
-import Signup from "../../views/Signup";
-import Login from "../../views/Login";
-import Search from "../../views/Search";
+import { Home, Signup, Login, Search } from "./config/AsyncComponent";
 
 import Private from "./config/PrivateRoute";
 import Public from "./config/PublicRoute";
