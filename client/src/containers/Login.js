@@ -1,9 +1,16 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+
 import LoginForm from "../components/Forms/Login";
+import { login } from "../store/actions/user";
 
 class Login extends Component {
 	onLogin = values => {
-		console.log(values);
+		const { userLogin } = this.props;
+
+		userLogin(values, () => {
+			console.log("[Redirect]");
+		});
 	};
 
 	render() {
@@ -12,4 +19,11 @@ class Login extends Component {
 	}
 }
 
-export default Login;
+const mapDispatchToProps = dispatch => ({
+	userLogin: (v, cb) => dispatch(login(v, cb))
+});
+
+export default connect(
+	null,
+	mapDispatchToProps
+)(Login);

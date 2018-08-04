@@ -23,3 +23,20 @@ export const signup = (values, cb) => {
 			});
 	};
 };
+
+export const login = (values, cb) => {
+	return dispatch => {
+		dispatch(userStart());
+		axios
+			.post("/api/user/login", values)
+			.then(({ data: { user } }) => {
+				dispatch(userSuccess(user));
+				if (cb) {
+					cb(user);
+				}
+			})
+			.catch(error => {
+				dispatch(userFail(error));
+			});
+	};
+};
