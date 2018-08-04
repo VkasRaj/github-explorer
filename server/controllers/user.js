@@ -92,4 +92,26 @@ const userLogout = (req, res, next) => {
 		.send("OK");
 };
 
-module.exports = { userSignup, userLogin, userLogout };
+const userAutoSignIn = (req, res, next) => {
+	/* req._user will be attached by isAuthenticate middleware */
+	const { _id } = req._user;
+	const { TOKEN: token } = req.cookies;
+
+	User.findById(_id)
+		.select("_id name email")
+		.then(user => {
+			if (user) {
+				return res.status(200).send({
+					token,
+					user,
+					message: "Authentication Successful"
+				});
+			} else {
+				return res.status(401).send({
+					error: "Unauthorized Access! Please login."
+				});
+			}
+		});
+};
+
+module.exports = { userSignup, userLogin, userLogout, userAutoSignIn };

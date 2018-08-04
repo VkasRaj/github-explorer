@@ -40,3 +40,20 @@ export const login = (values, cb) => {
 			});
 	};
 };
+
+export const autoSignIn = cb => {
+	return dispatch => {
+		dispatch(userStart());
+		axios
+			.get("/api/user/authenticate")
+			.then(({ data: { user } }) => {
+				dispatch(userSuccess(user));
+				if (cb) {
+					cb(user);
+				}
+			})
+			.catch(error => {
+				dispatch(userFail(error));
+			});
+	};
+};

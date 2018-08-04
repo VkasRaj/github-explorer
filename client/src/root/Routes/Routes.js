@@ -1,12 +1,21 @@
 import React, { Component } from "react";
-import { Switch, Route, Redirect } from "react-router-dom";
+import { withRouter, Switch, Route, Redirect } from "react-router-dom";
+import { connect } from "react-redux";
 
 import Home from "../../views/Home";
 import Signup from "../../views/Signup";
 import Login from "../../views/Login";
 import Search from "../../views/Search";
+import { autoSignIn } from "../../store/actions/index";
 
 class Routes extends Component {
+	componentDidMount() {
+		const { autoSignIn } = this.props;
+		console.log(1);
+
+		autoSignIn();
+	}
+
 	render() {
 		return (
 			<Switch>
@@ -20,4 +29,13 @@ class Routes extends Component {
 	}
 }
 
-export default Routes;
+const mapDispatchToProps = dispatch => ({
+	autoSignIn: () => dispatch(autoSignIn())
+});
+
+export default withRouter(
+	connect(
+		null,
+		mapDispatchToProps
+	)(Routes)
+);
