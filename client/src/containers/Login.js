@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 
 import LoginForm from "../components/Forms/Login";
-import { login } from "../store/actions/user";
+import { login } from "../store/actions/index";
 
 class Login extends Component {
 	onLogin = values => {
