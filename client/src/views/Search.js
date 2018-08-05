@@ -8,7 +8,7 @@ class Search extends Component {
     render() {
         return (
             <Fragment>
-                <FormLayout>
+                <FormLayout style={{ marginBottom: "1rem" }}>
                     <SearchContainer />
                 </FormLayout>
                 <Repos />
