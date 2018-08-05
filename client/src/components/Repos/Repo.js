@@ -1,4 +1,4 @@
-import React, { PureComponent } from "react";
+import React, { Component } from "react";
 import {
     Grid,
     Typography,
@@ -31,7 +31,16 @@ const styles = theme => ({
     }
 });
 
-class Repo extends PureComponent {
+class Repo extends Component {
+    shouldComponentUpdate(nextProps, nextState) {
+        const {
+            repo: { full_name }
+        } = this.props;
+        if (full_name === nextProps.repo.full_name) {
+            return false;
+        }
+    }
+
     render() {
         const {
             repo,
