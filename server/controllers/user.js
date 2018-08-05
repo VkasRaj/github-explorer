@@ -3,6 +3,7 @@ const jwt = require("jsonwebtoken");
 const fetch = require("node-fetch");
 
 const User = require("../models/user");
+const Search = require("../models/search");
 
 const { TOKEN_KEY } = require("../config/keys/index");
 
@@ -117,12 +118,28 @@ const userAutoSignIn = (req, res, next) => {
 
 const userSearch = (req, res) => {
     const { search } = req.body;
-    fetch(
-        `https://api.github.com/search/repositories?q=language:${search}&sort=stars&order=desc&page=1&per_page=10`
-    )
-        .then(result => result.json())
-        .then(body => {
-            res.status(200).send(body);
+    const { _id } = req._user;
+
+    const SEARCH = new Search({
+        query: search,
+        author: _id
+    });
+
+    SEARCH.save()
+        .then(() => {
+            fetch(
+                `https://api.github.com/search/repositories?q=language:${search}&sort=stars&order=desc&page=1&per_page=10`
+            )
+                .then(result => result.json())
+                .then(body => {
+                    res.status(200).send(body);
+                })
+                .catch(error => {
+                    res.status(500).send(error);
+                });
+        })
+        .catch(error => {
+            res.status(500).send(error);
         });
 };
 
