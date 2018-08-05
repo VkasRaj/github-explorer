@@ -4,6 +4,7 @@ import FormLayout from "../components/Forms/FormLayout";
 import SearchContainer from "../containers/Search/Search";
 import Repos from "../containers/Search/Repos";
 import SearchLoader from "../containers/Search/SearchLoader";
+import Info from "../containers/Search/Info";
 
 class Search extends Component {
     render() {
@@ -14,6 +15,7 @@ class Search extends Component {
                 </FormLayout>
                 <SearchLoader />
                 <Repos />
+                <Info />
             </Fragment>
         );
     }
