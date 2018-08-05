@@ -3,6 +3,7 @@ import FormLayout from "../components/Forms/FormLayout";
 
 import SearchContainer from "../containers/Search";
 import Repos from "../containers/Repos";
+import RepoLoader from "../components/RepoLoader";
 
 class Search extends Component {
     render() {
@@ -11,6 +12,7 @@ class Search extends Component {
                 <FormLayout style={{ marginBottom: "1rem" }}>
                     <SearchContainer />
                 </FormLayout>
+                <RepoLoader />
                 <Repos />
             </Fragment>
         );

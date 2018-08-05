@@ -1,7 +1,6 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
 import { asyncComponent } from "react-async-component";
-import { Grid, LinearProgress } from "@material-ui/core";
 
 const ReposList = asyncComponent({
     resolve: () => import("../components/Repos/Repos")
@@ -9,30 +8,14 @@ const ReposList = asyncComponent({
 
 class Repos extends Component {
     render() {
-        const { repos, reposLoading } = this.props;
+        const { repos } = this.props;
 
-        return (
-            <Fragment>
-                {reposLoading && (
-                    <Grid
-                        container
-                        justify="center"
-                        style={{ marginBottom: "1rem" }}
-                    >
-                        <Grid item xs={10} sm={6} md={3}>
-                            <LinearProgress />
-                        </Grid>
-                    </Grid>
-                )}
-                {repos && <ReposList repos={repos} />}
-            </Fragment>
-        );
+        return repos && <ReposList repos={repos} />;
     }
 }
 
 const mapStateToProps = state => ({
-    repos: state.github.repos,
-    reposLoading: state.github.loading
+    repos: state.github.repos
 });
 
 export default connect(mapStateToProps)(Repos);
