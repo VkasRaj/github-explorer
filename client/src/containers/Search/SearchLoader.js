@@ -1,29 +1,42 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
-import { Grid, LinearProgress } from "@material-ui/core";
+import { Grid, LinearProgress, Typography } from "@material-ui/core";
 
 class Repos extends Component {
     render() {
-        const { reposLoading } = this.props;
+        const { reposLoading, repoError } = this.props;
 
         return (
-            reposLoading && (
-                <Grid
-                    container
-                    justify="center"
-                    style={{ marginBottom: "1rem" }}
-                >
-                    <Grid item xs={10} sm={6} md={3}>
-                        <LinearProgress />
+            <Fragment>
+                {reposLoading && (
+                    <Grid
+                        container
+                        justify="center"
+                        style={{ marginBottom: "1rem" }}
+                    >
+                        <Grid item xs={10} sm={6} md={3}>
+                            <LinearProgress />
+                        </Grid>
                     </Grid>
-                </Grid>
-            )
+                )}
+                {repoError && (
+                    <Typography
+                        align="center"
+                        variant="subheading"
+                        color="error"
+                        paragraph
+                    >
+                        Opps.. Something went wrong
+                    </Typography>
+                )}
+            </Fragment>
         );
     }
 }
 
 const mapStateToProps = state => ({
-    reposLoading: state.github.loading
+    reposLoading: state.github.loading,
+    repoError: state.github.error
 });
 
 export default connect(mapStateToProps)(Repos);
