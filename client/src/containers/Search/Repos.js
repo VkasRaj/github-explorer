@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { asyncComponent } from "react-async-component";
 
 const ReposList = asyncComponent({
-    resolve: () => import("../components/Repos/Repos")
+    resolve: () => import("../../components/Repos/Repos")
 });
 
 class Repos extends Component {

@@ -1,9 +1,9 @@
 import React, { Component, Fragment } from "react";
 import FormLayout from "../components/Forms/FormLayout";
 
-import SearchContainer from "../containers/Search";
-import Repos from "../containers/Repos";
-import RepoLoader from "../components/RepoLoader";
+import SearchContainer from "../containers/Search/Search";
+import Repos from "../containers/Search/Repos";
+import SearchLoader from "../containers/Search/SearchLoader";
 
 class Search extends Component {
     render() {
@@ -12,7 +12,7 @@ class Search extends Component {
                 <FormLayout style={{ marginBottom: "1rem" }}>
                     <SearchContainer />
                 </FormLayout>
-                <RepoLoader />
+                <SearchLoader />
                 <Repos />
             </Fragment>
         );
