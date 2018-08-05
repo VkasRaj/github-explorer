@@ -1,16 +1,20 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import FormLayout from "../components/Forms/FormLayout";
 
 import SearchContainer from "../containers/Search";
+import Repos from "../containers/Repos";
 
 class Search extends Component {
-	render() {
-		return (
-			<FormLayout>
-				<SearchContainer />
-			</FormLayout>
-		);
-	}
+    render() {
+        return (
+            <Fragment>
+                <FormLayout>
+                    <SearchContainer />
+                </FormLayout>
+                <Repos />
+            </Fragment>
+        );
+    }
 }
 
 export default Search;
