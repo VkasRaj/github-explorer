@@ -7,36 +7,40 @@ import { SearchOutlined as SearchIcon } from "@material-ui/icons";
 import { inputField } from "./formControls";
 
 class Search extends Component {
-	render() {
-		const { handleSubmit } = this.props;
+    render() {
+        const { handleSubmit, pristine } = this.props;
 
-		return (
-			<Fragment>
-				<Form onSubmit={handleSubmit} noValidate>
-					<Field
-						name="search"
-						label="Search Github"
-						placeholder="Enter your preffered or any language"
-						type="text"
-						component={inputField}
-						InputProps={{
-							endAdornment: (
-								<InputAdornment position="end">
-									<IconButton color="primary" type="submit">
-										<SearchIcon />
-									</IconButton>
-								</InputAdornment>
-							)
-						}}
-					/>
-				</Form>
-			</Fragment>
-		);
-	}
+        return (
+            <Fragment>
+                <Form onSubmit={handleSubmit} noValidate>
+                    <Field
+                        name="search"
+                        label="Search Github"
+                        placeholder="Enter your preffered or any language"
+                        type="text"
+                        component={inputField}
+                        InputProps={{
+                            endAdornment: (
+                                <InputAdornment position="end">
+                                    <IconButton
+                                        disabled={pristine}
+                                        color="primary"
+                                        type="submit"
+                                    >
+                                        <SearchIcon />
+                                    </IconButton>
+                                </InputAdornment>
+                            )
+                        }}
+                    />
+                </Form>
+            </Fragment>
+        );
+    }
 }
 
 Search = reduxForm({
-	form: "search"
+    form: "search"
 })(Search);
 
 export default Search;
