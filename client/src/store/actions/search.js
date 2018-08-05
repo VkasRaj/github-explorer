@@ -16,9 +16,7 @@ export const search = ({ search }) => {
     return dispatch => {
         dispatch(repoStart());
         axios
-            .get(
-                `https://api.github.com/search/repositories?q=language:${search}&sort=stars&order=desc&page=1&per_page=10`
-            )
+            .post("/api/user/search", { search })
             .then(({ data: { items } }) => {
                 dispatch(repoSuccess(items));
             })
