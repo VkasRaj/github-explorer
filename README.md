@@ -24,7 +24,7 @@ module.exports = {
 
 ## Second Step
 
-Intall **server** and and **client** dependencies by running following commands
+Intall **server** and **client** dependencies by running following commands
 
 #### For Server Dependencies
 
