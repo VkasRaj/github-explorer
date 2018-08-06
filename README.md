@@ -4,6 +4,24 @@
 
 Create a file name `keys.dev.js` in _server/config/keys_ folder.
 
+Add following into the file
+
+```js
+/**
+ * Following are the variables used in the app.
+ * In production mode this variable should be stored in environment variable on the server.
+ *
+ * MONGO_URI: it is the connection url of mongoDB i.e. for local: mongodb://localhost:27017/github-explorer
+ *
+ * TOKEN_KEY: it can be any random string, used as a secret key when creating a login token
+ */
+
+module.exports = {
+    MONGO_URI: "<your mongo uri>",
+    TOKEN_KEY: "<random text>"
+};
+```
+
 ## Second Step
 
 Intall **server** and and **client** dependencies by running following commands
