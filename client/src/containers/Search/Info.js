@@ -10,12 +10,16 @@ import {
     ListItemIcon
 } from "@material-ui/core";
 import {
-    InfoTwoTone as InfoIcon,
+    MoreVertTwoTone as InfoIcon,
     ArrowBack as ExitIcon,
     HistoryTwoTone as LastSearchIcon
 } from "@material-ui/icons";
+import { asyncComponent } from "react-async-component";
 
 import { onSearchList } from "../../store/actions";
+const LastSearchList = asyncComponent({
+    resolve: () => import("../../components/LastSearch")
+});
 
 const styles = theme => ({
     infoButton: {
@@ -27,20 +31,31 @@ const styles = theme => ({
 
 class Info extends Component {
     state = {
-        infoDialog: false
+        infoDialog: false,
+        lastSearchDialog: false
     };
 
     openDailog = () => this.setState({ infoDialog: true });
 
     closeDialog = () => this.setState({ infoDialog: false });
 
+    closeLastSearch = () => this.setState({ lastSearchDialog: false });
+
+    onQuery = () => {
+        const { querySearchList } = this.props;
+        this.setState({ lastSearchDialog: true, infoDialog: false });
+        querySearchList();
+    };
+
     render() {
         const {
             openDailog,
             closeDialog,
-            state: { infoDialog },
+            closeLastSearch,
+            onQuery,
+            state: { infoDialog, lastSearchDialog },
             props: {
-                searchList,
+                lastSearch,
                 classes: { infoButton }
             }
         } = this;
@@ -51,14 +66,14 @@ class Info extends Component {
                     mini
                     variant="fab"
                     className={infoButton}
-                    color="primary"
+                    color="secondary"
                     onClick={openDailog}
                 >
                     <InfoIcon />
                 </Button>
                 <Dialog open={infoDialog} onClose={closeDialog}>
                     <List>
-                        <ListItem button onClick={searchList}>
+                        <ListItem button onClick={onQuery}>
                             <ListItemIcon>
                                 <LastSearchIcon />
                             </ListItemIcon>
@@ -72,16 +87,27 @@ class Info extends Component {
                         </ListItem>
                     </List>
                 </Dialog>
+                {lastSearchDialog && (
+                    <LastSearchList
+                        open={lastSearchDialog}
+                        close={closeLastSearch}
+                        searchList={lastSearch}
+                    />
+                )}
             </Fragment>
         );
     }
 }
 
+const mapStateToProps = state => ({
+    lastSearch: state.github.lastSearch
+});
+
 const mapDispatchToProps = dispatch => ({
-    searchList: () => dispatch(onSearchList())
+    querySearchList: () => dispatch(onSearchList())
 });
 
 export default connect(
-    null,
+    mapStateToProps,
     mapDispatchToProps
 )(withStyles(styles)(Info));
