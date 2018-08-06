@@ -7,12 +7,15 @@ const {
     userLogin,
     userLogout,
     userAutoSignIn,
-    userSearch
+    userSearch,
+    userSearchList
 } = require("../controllers/user");
 
 router.post("/signup", userSignup);
 
 router.post("/login", userLogin);
+
+router.get("/search", isAuthenticate, userSearchList);
 
 router.post("/search", isAuthenticate, userSearch);
 

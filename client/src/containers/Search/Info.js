@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from "react";
+import { connect } from "react-redux";
 import {
     Button,
     withStyles,
@@ -13,6 +14,8 @@ import {
     ArrowBack as ExitIcon,
     HistoryTwoTone as LastSearchIcon
 } from "@material-ui/icons";
+
+import { onSearchList } from "../../store/actions";
 
 const styles = theme => ({
     infoButton: {
@@ -37,6 +40,7 @@ class Info extends Component {
             closeDialog,
             state: { infoDialog },
             props: {
+                searchList,
                 classes: { infoButton }
             }
         } = this;
@@ -44,6 +48,7 @@ class Info extends Component {
         return (
             <Fragment>
                 <Button
+                    mini
                     variant="fab"
                     className={infoButton}
                     color="primary"
@@ -53,7 +58,7 @@ class Info extends Component {
                 </Button>
                 <Dialog open={infoDialog} onClose={closeDialog}>
                     <List>
-                        <ListItem button>
+                        <ListItem button onClick={searchList}>
                             <ListItemIcon>
                                 <LastSearchIcon />
                             </ListItemIcon>
@@ -72,4 +77,11 @@ class Info extends Component {
     }
 }
 
-export default withStyles(styles)(Info);
+const mapDispatchToProps = dispatch => ({
+    searchList: () => dispatch(onSearchList())
+});
+
+export default connect(
+    null,
+    mapDispatchToProps
+)(withStyles(styles)(Info));

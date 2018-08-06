@@ -1,2 +1,2 @@
 export { signup, login, autoSignIn } from "./user";
-export { search } from "./search";
+export { search, onSearchList } from "./search";

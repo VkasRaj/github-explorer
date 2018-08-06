@@ -20,18 +20,18 @@ require("./server/middlewares/express")(app);
 
 /* Connecting MonogoDB */
 mongoose
-	.connect(
-		MONGO_URI,
-		{
-			useNewUrlParser: true
-		}
-	)
-	.then(() => console.log("MongoDB successfully connected!"))
-	.catch(e => console.log(e));
+    .connect(
+        MONGO_URI,
+        {
+            useNewUrlParser: true
+        }
+    )
+    .then(() => console.log("MongoDB successfully connected!"))
+    .catch(e => console.log(e));
 
 /* Firing up Server */
 app.listen(PORT, () => {
-	console.log(`Server is up on port: ${PORT}`);
+    console.log(`Server is up on port: ${PORT}`);
 });
 
 /* Routes Registering */
@@ -39,8 +39,8 @@ app.use("/api/user", user);
 
 /* Serving build files if production */
 if (process.env.NODE_ENV === "production") {
-	app.use(express.static(path.resolve(__dirname, "client/build")));
-	app.get("*", (req, res) =>
-		res.sendFile(path.resolve(__dirname, "client/build", "index.html"))
-	);
+    app.use(express.static(path.resolve(__dirname, "client/build")));
+    app.get("*", (req, res) =>
+        res.sendFile(path.resolve(__dirname, "client/build", "index.html"))
+    );
 }

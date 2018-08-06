@@ -143,10 +143,25 @@ const userSearch = (req, res) => {
         });
 };
 
+const userSearchList = (req, res) => {
+    const { _id: author } = req._user;
+
+    Search.find({ author })
+        .sort({ _id: -1 })
+        .limit(5)
+        .then(result => {
+            res.status(200).send({ message: "Successfull", result });
+        })
+        .catch(error => {
+            res.status(500).send(error);
+        });
+};
+
 module.exports = {
     userSignup,
     userLogin,
     userLogout,
     userAutoSignIn,
-    userSearch
+    userSearch,
+    userSearchList
 };
