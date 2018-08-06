@@ -16,7 +16,7 @@ import {
 } from "@material-ui/icons";
 import { asyncComponent } from "react-async-component";
 
-import { onSearchList } from "../../store/actions";
+import { onSearchList, logout } from "../../store/actions";
 const LastSearchList = asyncComponent({
     resolve: () => import("../../components/LastSearch")
 });
@@ -56,6 +56,7 @@ class Info extends Component {
             state: { infoDialog, lastSearchDialog },
             props: {
                 lastSearch,
+                onLogout,
                 classes: { infoButton }
             }
         } = this;
@@ -79,7 +80,7 @@ class Info extends Component {
                             </ListItemIcon>
                             <ListItemText primary="Last 5 Search(s)" />
                         </ListItem>
-                        <ListItem button>
+                        <ListItem button onClick={onLogout}>
                             <ListItemIcon>
                                 <ExitIcon />
                             </ListItemIcon>
@@ -104,6 +105,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
+    onLogout: () => dispatch(logout()),
     querySearchList: () => dispatch(onSearchList())
 });
 
