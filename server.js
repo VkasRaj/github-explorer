@@ -1,6 +1,7 @@
 const path = require("path");
 const express = require("express");
 const mongoose = require("mongoose");
+const expressStaticGzip = require("express-static-gzip");
 const app = express();
 
 const PORT = process.env.PORT || 5000;
@@ -39,11 +40,7 @@ app.use("/api/user", user);
 
 /* Serving build files if production */
 if (process.env.NODE_ENV === "production") {
-    app.get("*.js", (req, res, next) => {
-        req.url = req.url + ".gz";
-        res.set("Content-Encoding", "gzip");
-    });
-    app.use(express.static(path.resolve(__dirname, "client/build")));
+    app.use(expressStaticGzip(path.resolve(__dirname, "client/build")));
     app.get("*", (req, res) =>
         res.sendFile(path.resolve(__dirname, "client/build", "index.html"))
     );
