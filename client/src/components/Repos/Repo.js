@@ -13,7 +13,7 @@ import {
 import {
     WarningTwoTone as IssueIcon,
     LinkTwoTone as LinkIcon,
-    LanguageTwoTone as WebIcon,
+    PublicTwoTone as WebIcon,
     StarTwoTone as StarIcon,
     CallSplitTwoTone as ForkIcon
 } from "@material-ui/icons";
@@ -49,7 +49,7 @@ class Repo extends Component {
 
         let homepageLink = repo.homepage && (
             <Grid container alignItems="center" className={linkMargin}>
-                <WebIcon className={icon} />
+                <WebIcon className={icon} color="action" />
                 <Typography variant="caption">
                     <a
                         href={repo.homepage}
@@ -79,7 +79,9 @@ class Repo extends Component {
                             </Hidden>
                             <Grid item xs={12} md={9}>
                                 <CardContent>
-                                    <Typography>{repo.full_name}</Typography>
+                                    <Typography variant="body2">
+                                        {repo.full_name}
+                                    </Typography>
                                     <Typography variant="caption" gutterBottom>
                                         {repo.description}
                                     </Typography>
@@ -109,7 +111,10 @@ class Repo extends Component {
                                             !repo.homepage ? linkMargin : ""
                                         }
                                     >
-                                        <LinkIcon className={icon} />
+                                        <LinkIcon
+                                            className={icon}
+                                            color="action"
+                                        />
                                         <Typography variant="caption">
                                             <a
                                                 href={repo.html_url}
