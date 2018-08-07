@@ -334,7 +334,8 @@ module.exports = {
         new CompressionPlugin({
             test: /\.(js|css|jpeg|png)/,
             algorithm: "gzip",
-            cache: true
+            cache: true,
+            deleteOriginalAssets: true
         })
     ],
     // Some libraries import Node modules but don't use them in the browser.
