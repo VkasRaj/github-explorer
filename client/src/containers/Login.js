@@ -5,25 +5,32 @@ import LoginForm from "../components/Forms/Login";
 import { login } from "../store/actions/index";
 
 class Login extends Component {
-	onLogin = values => {
-		const { userLogin } = this.props;
+    onLogin = values => {
+        const { userLogin } = this.props;
 
-		userLogin(values, () => {
-			console.log("[Redirect]");
-		});
-	};
+        userLogin(values, () => {
+            console.log("[Redirect]");
+        });
+    };
 
-	render() {
-		const { onLogin } = this;
-		return <LoginForm onSubmit={onLogin} />;
-	}
+    render() {
+        const {
+            onLogin,
+            props: { error }
+        } = this;
+        return <LoginForm onSubmit={onLogin} formError={error} />;
+    }
 }
 
+const mapStateToProps = state => ({
+    error: state.user.error.login
+});
+
 const mapDispatchToProps = dispatch => ({
-	userLogin: (v, cb) => dispatch(login(v, cb))
+    userLogin: (v, cb) => dispatch(login(v, cb))
 });
 
 export default connect(
-	null,
-	mapDispatchToProps
+    mapStateToProps,
+    mapDispatchToProps
 )(Login);

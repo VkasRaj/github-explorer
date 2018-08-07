@@ -8,7 +8,7 @@ import {
 const initState = {
     user: null,
     loading: false,
-    error: null
+    error: {}
 };
 
 const userStart = (state, action) => ({ ...state, loading: true });
@@ -20,7 +20,7 @@ const userFail = (state, { error }) => ({ ...state, loading: false, error });
 const userLogout = (state, action) => ({
     user: null,
     loading: false,
-    error: null
+    error: {}
 });
 
 const reducer = (state = initState, { type, ...action }) => {

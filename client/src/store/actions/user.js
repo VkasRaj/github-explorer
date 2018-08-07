@@ -8,7 +8,7 @@ import {
 
 const userStart = () => ({ type: USER_START });
 
-const userFail = () => ({ type: USER_FAIL });
+const userFail = error => ({ type: USER_FAIL, error });
 
 const userSuccess = user => ({ type: USER_SUCCESS, user });
 
@@ -25,8 +25,8 @@ export const signup = (values, cb) => {
                     cb();
                 }
             })
-            .catch(error => {
-                dispatch(userFail(error));
+            .catch(({ response: { data: { error } } }) => {
+                dispatch(userFail({ signup: error }));
             });
     };
 };
@@ -42,8 +42,8 @@ export const login = (values, cb) => {
                     cb(user);
                 }
             })
-            .catch(error => {
-                dispatch(userFail(error));
+            .catch(({ response: { data: { error } } }) => {
+                dispatch(userFail({ login: error }));
             });
     };
 };

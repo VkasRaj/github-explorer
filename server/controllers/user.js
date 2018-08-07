@@ -10,36 +10,40 @@ const { TOKEN_KEY } = require("../config/keys/index");
 const userSignup = (req, res) => {
     const { email, name, password } = req.body;
 
-    User.findOne({ email }).then(user => {
-        if (user) {
-            return res.status(409).send({
-                error: "Email already registered!"
-            });
-        }
-
-        bcrypt.genSalt(10, (error, salt) => {
-            bcrypt.hash(password, salt, (error, hash) => {
-                if (error) {
-                    throw error;
-                }
-                const USER = new User({
-                    name,
-                    email,
-                    password: hash
+    User.findOne({ email })
+        .then(user => {
+            if (user) {
+                return res.status(409).send({
+                    error: "Email already registered!"
                 });
+            }
 
-                USER.save()
-                    .then(user => {
-                        res.status(201).send({
-                            message: "Successfully registered"
-                        });
-                    })
-                    .catch(error => {
-                        res.status(500).send({ error });
+            bcrypt.genSalt(10, (error, salt) => {
+                bcrypt.hash(password, salt, (error, hash) => {
+                    if (error) {
+                        throw error;
+                    }
+                    const USER = new User({
+                        name,
+                        email,
+                        password: hash
                     });
+
+                    USER.save()
+                        .then(user => {
+                            res.status(201).send({
+                                message: "Successfully registered"
+                            });
+                        })
+                        .catch(error => {
+                            res.status(500).send({ error });
+                        });
+                });
             });
+        })
+        .catch(error => {
+            res.status(500).send({ error });
         });
-    });
 };
 
 const userLogin = (req, res, next) => {
@@ -48,7 +52,7 @@ const userLogin = (req, res, next) => {
     User.findOne({ email })
         .then(user => {
             if (!user) {
-                return res.status(404).send({
+                return res.status(400).send({
                     error: "Incorrect email or password"
                 });
             }
@@ -73,7 +77,7 @@ const userLogin = (req, res, next) => {
                             token
                         });
                 } else {
-                    return res.status(404).send({
+                    return res.status(400).send({
                         error: "Incorrect email or password"
                     });
                 }
