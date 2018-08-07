@@ -272,7 +272,14 @@ module.exports = {
                 // https://github.com/facebookincubator/create-react-app/issues/2376
                 // Pending further investigation:
                 // https://github.com/mishoo/UglifyJS2/issues/2011
-                comparisons: false
+                comparisons: true,
+                conditionals: true,
+                unused: true,
+                evaluate: true,
+                dead_code: true,
+                sequences: true,
+                if_return: true,
+                join_vars: true
             },
             mangle: {
                 safari10: true
