@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 
 import SignupForm from "../components/Forms/Signup";
-import { signup } from "../store/actions/index";
+import { signup } from "../store/actions";
 
 class Signup extends Component {
     onSignUp = values => {
