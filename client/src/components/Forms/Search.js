@@ -1,8 +1,8 @@
 import React, { Component, Fragment } from "react";
 import { Form, Field, reduxForm } from "redux-form";
-
-import { InputAdornment, IconButton } from "@material-ui/core";
-import { SearchOutlined as SearchIcon } from "@material-ui/icons";
+import IconButton from "@material-ui/core/IconButton";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import SearchIcon from "@material-ui/icons/SearchOutlined";
 
 import { inputField } from "./formControls";
 

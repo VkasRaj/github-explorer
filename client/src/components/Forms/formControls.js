@@ -1,12 +1,10 @@
 import React from "react";
-import {
-    TextField,
-    Typography,
-    Paper,
-    Button,
-    FormControl,
-    CircularProgress
-} from "@material-ui/core";
+import TextField from "@material-ui/core/TextField";
+import Typography from "@material-ui/core/Typography";
+import Paper from "@material-ui/core/Paper";
+import Button from "@material-ui/core/Button";
+import FormControl from "@material-ui/core/FormControl";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 export const inputField = ({ input, meta: { error, touched }, ...field }) => {
     return (

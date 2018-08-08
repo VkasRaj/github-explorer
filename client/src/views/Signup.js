@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { Typography } from "@material-ui/core";
-import { NavLink } from "react-router-dom";
+import Typography from "@material-ui/core/Typography";
+import NavLink from "react-router-dom/NavLink";
 
 import FormLayout from "../components/Forms/FormLayout";
 import SignupContainer from "../containers/Signup";

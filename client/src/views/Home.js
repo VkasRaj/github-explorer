@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import { Button, Typography } from "@material-ui/core";
-import { NavLink } from "react-router-dom";
+import Button from "@material-ui/core/Button";
+import Typography from "@material-ui/core/Typography";
+import NavLink from "react-router-dom/NavLink";
 
 import FormLayout from "../components/Forms/FormLayout";
 

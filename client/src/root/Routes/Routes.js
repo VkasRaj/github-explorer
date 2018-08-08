@@ -1,5 +1,7 @@
 import React, { Component } from "react";
-import { withRouter, Switch, Redirect } from "react-router-dom";
+import withRouter from "react-router-dom/withRouter";
+import Switch from "react-router-dom/Switch";
+import Redirect from "react-router-dom/Redirect";
 import { connect } from "react-redux";
 
 import { Home, Signup, Login, Search } from "./config/AsyncRoutes";

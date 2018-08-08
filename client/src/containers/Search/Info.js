@@ -1,22 +1,21 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
-import {
-    Button,
-    withStyles,
-    Dialog,
-    List,
-    ListItem,
-    ListItemText,
-    ListItemIcon
-} from "@material-ui/core";
-import {
-    MoreVertTwoTone as InfoIcon,
-    ArrowBack as ExitIcon,
-    HistoryTwoTone as LastSearchIcon
-} from "@material-ui/icons";
 import { asyncComponent } from "react-async-component";
 
+import Button from "@material-ui/core/Button";
+import Dialog from "@material-ui/core/Dialog";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemText from "@material-ui/core/ListItemText";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import withStyles from "@material-ui/core/styles/withStyles";
+
+import InfoIcon from "@material-ui/icons/MoreVertTwoTone";
+import ExitIcon from "@material-ui/icons/ArrowBack";
+import LastSearchIcon from "@material-ui/icons/HistoryTwoTone";
+
 import { onSearchList, logout } from "../../store/actions";
+
 const LastSearchList = asyncComponent({
     resolve: () => import("../../components/LastSearch")
 });

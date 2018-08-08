@@ -10,7 +10,7 @@ class Repos extends Component {
     render() {
         const { repos } = this.props;
 
-        return repos && <ReposList repos={repos} />;
+        return <ReposList repos={repos} />;
     }
 }
 

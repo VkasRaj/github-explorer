@@ -1,6 +1,8 @@
 import React from "react";
-import { Grid, withStyles, Typography } from "@material-ui/core";
-import { NavLink } from "react-router-dom";
+import NavLink from "react-router-dom/NavLink";
+import Typography from "@material-ui/core/Typography";
+import Grid from "@material-ui/core/Grid";
+import withStyles from "@material-ui/core/styles/withStyles";
 
 import Logo from "../Logo";
 

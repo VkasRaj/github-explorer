@@ -1,5 +1,8 @@
 import React from "react";
-import { Dialog, List, ListItem, ListItemText } from "@material-ui/core";
+import Dialog from "@material-ui/core/Dialog";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemText from "@material-ui/core/ListItemText";
 
 const LastSearch = ({ searchList, open, close }) => {
     let _list = (

@@ -3,7 +3,8 @@ import React from "react";
 import Repo from "./Repo";
 
 const Repos = ({ repos }) => {
-    const list = repos.map(({ id, ...repo }) => <Repo key={id} repo={repo} />);
+    const list =
+        repos && repos.map(({ id, ...repo }) => <Repo key={id} repo={repo} />);
 
     return list;
 };

@@ -1,22 +1,23 @@
 import React, { Component } from "react";
-import { Route, Redirect } from "react-router-dom";
+import Route from "react-router-dom/Route";
+import Redirect from "react-router-dom/Redirect";
 
 class PublicRoute extends Component {
-	render() {
-		const { isAuth, component: Component, ...rest } = this.props;
-		const { from } = this.props.location.state || {
-			from: { pathname: "/search" }
-		};
+    render() {
+        const { isAuth, component: Component, ...rest } = this.props;
+        const { from } = this.props.location.state || {
+            from: { pathname: "/search" }
+        };
 
-		return (
-			<Route
-				{...rest}
-				render={props =>
-					isAuth ? <Redirect to={from} /> : <Component {...props} />
-				}
-			/>
-		);
-	}
+        return (
+            <Route
+                {...rest}
+                render={props =>
+                    isAuth ? <Redirect to={from} /> : <Component {...props} />
+                }
+            />
+        );
+    }
 }
 
 export default PublicRoute;

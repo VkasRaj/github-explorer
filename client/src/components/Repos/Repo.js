@@ -1,22 +1,18 @@
 import React, { Component } from "react";
-import {
-    Grid,
-    Typography,
-    Card,
-    CardMedia,
-    CardContent,
-    withStyles,
-    Tooltip,
-    Hidden
-} from "@material-ui/core";
+import Grid from "@material-ui/core/Grid";
+import Typography from "@material-ui/core/Typography";
+import Card from "@material-ui/core/Card";
+import CardMedia from "@material-ui/core/CardMedia";
+import CardContent from "@material-ui/core/CardContent";
+import withStyles from "@material-ui/core/styles/withStyles";
+import Tooltip from "@material-ui/core/Tooltip";
+import Hidden from "@material-ui/core/Hidden";
 
-import {
-    WarningTwoTone as IssueIcon,
-    LinkTwoTone as LinkIcon,
-    PublicTwoTone as WebIcon,
-    StarTwoTone as StarIcon,
-    CallSplitTwoTone as ForkIcon
-} from "@material-ui/icons";
+import IssueIcon from "@material-ui/icons/WarningTwoTone";
+import LinkIcon from "@material-ui/icons/LinkTwoTone";
+import WebIcon from "@material-ui/icons/PublicTwoTone";
+import StarIcon from "@material-ui/icons/StarTwoTone";
+import ForkIcon from "@material-ui/icons/CallSplitTwoTone";
 
 const styles = theme => ({
     icon: {
