@@ -341,7 +341,7 @@ module.exports = {
         // You can remove this if you don't use Moment.js:
         new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
         new CompressionPlugin({
-            test: /\.(js|css|html|jpeg|png)/,
+            test: /\.(js|css|jpeg|png)/,
             algorithm: "gzip",
             cache: true,
             deleteOriginalAssets: true
