@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 import { Formik, Field } from "formik";
 import withStyles from "@material-ui/core/styles/withStyles";
 
-import { _inputField, ErrorPaper, LoadingButton } from "./formControls";
+import { inputField, ErrorPaper, LoadingButton } from "./formControls";
 
 const styles = theme => {
     const {
@@ -42,21 +42,21 @@ const Login = ({ onSubmit, formError, classes }) => {
                                 label="Name"
                                 placeholder="John Doe"
                                 type="text"
-                                component={_inputField}
+                                component={inputField}
                             />
                             <Field
                                 name="email"
                                 label="Email"
                                 placeholder="johndoe@email.com"
                                 type="email"
-                                component={_inputField}
+                                component={inputField}
                             />
                             <Field
                                 name="password"
                                 label="Password"
                                 placeholder="I'll be our secret"
                                 type="password"
-                                component={_inputField}
+                                component={inputField}
                             />
                             <LoadingButton pristine={!dirty}>
                                 Signup

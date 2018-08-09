@@ -6,23 +6,7 @@ import Button from "@material-ui/core/Button";
 import FormControl from "@material-ui/core/FormControl";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
-export const inputField = ({ input, meta: { error, touched }, ...field }) => {
-    return (
-        <TextField
-            {...input}
-            {...field}
-            margin="normal"
-            error={touched && error ? true : false}
-            helperText={touched && error ? error : null}
-            InputLabelProps={{
-                shrink: true
-            }}
-            fullWidth
-        />
-    );
-};
-
-export const _inputField = ({
+export const inputField = ({
     field, // { name, value, onChange, onBlur }
     form: { touched, errors }, // also values, setXXXX, handleXXXX, dirty, isValid, status, etc.
     ...props

@@ -4,7 +4,7 @@ import IconButton from "@material-ui/core/IconButton";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import SearchIcon from "@material-ui/icons/SearchOutlined";
 
-import { _inputField } from "./formControls";
+import { inputField } from "./formControls";
 
 const Search = ({ onSubmit }) => {
     return (
@@ -22,7 +22,7 @@ const Search = ({ onSubmit }) => {
                                 label="Search Github"
                                 placeholder="Enter your preffered or any language"
                                 type="text"
-                                component={_inputField}
+                                component={inputField}
                                 InputProps={{
                                     endAdornment: (
                                         <InputAdornment position="end">
