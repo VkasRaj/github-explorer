@@ -3,6 +3,7 @@ import { Formik, Field } from "formik";
 import withStyles from "@material-ui/core/styles/withStyles";
 
 import { inputField, ErrorPaper, LoadingButton } from "./formControls";
+import validate from "./config/loginValidation";
 
 const styles = theme => {
     const {
@@ -22,6 +23,9 @@ const Login = ({ onSubmit, formError, classes }) => {
     return (
         <Formik
             onSubmit={onSubmit}
+            validate={validate}
+            validateOnBlur={false}
+            validateOnChange={false}
             initialValues={{
                 name: "",
                 email: "",
