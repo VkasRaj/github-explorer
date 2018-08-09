@@ -1,25 +1,35 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import Redirect from "react-router-dom/Redirect";
 
 import SignupForm from "../components/Forms/Signup";
 import { signup } from "../store/actions";
 
 class Signup extends Component {
+    state = {
+        redirectLogin: false
+    };
+
     onSignUp = values => {
         const { userSignUp } = this.props;
 
         userSignUp(values, () => {
-            console.log("[Redirect]");
+            this.setState({ redirectLogin: true });
         });
     };
 
     render() {
         const {
             onSignUp,
+            state: { redirectLogin },
             props: { error }
         } = this;
 
-        return <SignupForm onSubmit={onSignUp} formError={error} />;
+        return redirectLogin ? (
+            <Redirect to="/login" />
+        ) : (
+            <SignupForm onSubmit={onSignUp} formError={error} />
+        );
     }
 }
 
