@@ -42,6 +42,8 @@ app.use("/api/user", user);
 if (process.env.NODE_ENV === "production") {
     app.use(expressStaticGzip(path.resolve(__dirname, "client/build")));
     app.get("*", (req, res) =>
-        res.sendFile(path.resolve(__dirname, "client/build", "index.html"))
+        res.sendFile("index.html", {
+            root: `${__dirname}/client/build`
+        })
     );
 }
