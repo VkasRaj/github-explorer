@@ -1,9 +1,8 @@
-import React, { Component, Fragment } from "react";
+import React, { Fragment } from "react";
+import { Formik, Field } from "formik";
 import withStyles from "@material-ui/core/styles/withStyles";
-import { Form, Field, reduxForm } from "redux-form";
 
-import validate from "./config/validate";
-import { inputField, ErrorPaper, LoadingButton } from "./formControls";
+import { _inputField, ErrorPaper, LoadingButton } from "./formControls";
 
 const styles = theme => {
     const {
@@ -18,56 +17,56 @@ const styles = theme => {
         }
     };
 };
-class SignUp extends Component {
-    render() {
-        const {
-            handleSubmit,
-            loading,
-            formError,
-            pristine,
-            classes
-        } = this.props;
 
-        return (
-            <Fragment>
-                <ErrorPaper
-                    error={formError}
-                    classes={{
-                        root: classes.errorPaper
-                    }}
-                />
-                <Form onSubmit={handleSubmit} noValidate>
-                    <Field
-                        name="name"
-                        label="Name"
-                        placeholder="John Doe"
-                        type="text"
-                        component={inputField}
-                    />
-                    <Field
-                        name="email"
-                        label="Email"
-                        placeholder="johndoe@email.com"
-                        type="email"
-                        component={inputField}
-                    />
-                    <Field
-                        name="password"
-                        label="Password"
-                        placeholder="I'll be our secret"
-                        type="password"
-                        component={inputField}
-                    />
-                    <LoadingButton loading={loading} pristine={pristine} />
-                </Form>
-            </Fragment>
-        );
-    }
-}
+const Login = ({ onSubmit, formError, classes }) => {
+    return (
+        <Formik
+            onSubmit={onSubmit}
+            initialValues={{
+                name: "",
+                email: "",
+                password: ""
+            }}
+            render={({ handleSubmit, dirty, ...props }) => {
+                return (
+                    <Fragment>
+                        <ErrorPaper
+                            error={formError}
+                            classes={{
+                                root: classes.errorPaper
+                            }}
+                        />
+                        <form onSubmit={handleSubmit} noValidate>
+                            <Field
+                                name="name"
+                                label="Name"
+                                placeholder="John Doe"
+                                type="text"
+                                component={_inputField}
+                            />
+                            <Field
+                                name="email"
+                                label="Email"
+                                placeholder="johndoe@email.com"
+                                type="email"
+                                component={_inputField}
+                            />
+                            <Field
+                                name="password"
+                                label="Password"
+                                placeholder="I'll be our secret"
+                                type="password"
+                                component={_inputField}
+                            />
+                            <LoadingButton pristine={!dirty}>
+                                Signup
+                            </LoadingButton>
+                        </form>
+                    </Fragment>
+                );
+            }}
+        />
+    );
+};
 
-SignUp = reduxForm({
-    form: "signup",
-    validate
-})(SignUp);
-
-export default withStyles(styles)(SignUp);
+export default withStyles(styles)(Login);
