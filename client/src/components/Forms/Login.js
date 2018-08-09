@@ -1,9 +1,8 @@
-import React, { Component, Fragment } from "react";
+import React, { Fragment } from "react";
+import { Formik, Field } from "formik";
 import withStyles from "@material-ui/core/styles/withStyles";
-import { reduxForm, Field, Form } from "redux-form";
 
-import validate from "./config/validate";
-import { inputField, ErrorPaper, LoadingButton } from "./formControls";
+import { _inputField, ErrorPaper, LoadingButton } from "./formControls";
 
 const styles = theme => {
     const {
@@ -19,49 +18,47 @@ const styles = theme => {
     };
 };
 
-class Login extends Component {
-    render() {
-        const {
-            classes,
-            loading,
-            handleSubmit,
-            pristine,
-            formError
-        } = this.props;
-
-        return (
-            <Fragment>
-                <ErrorPaper
-                    error={formError}
-                    classes={{
-                        root: classes.errorPaper
-                    }}
-                />
-                <Form onSubmit={handleSubmit} noValidate>
-                    <Field
-                        name="email"
-                        label="Email"
-                        placeholder="johndoe@email.com"
-                        type="email"
-                        component={inputField}
-                    />
-                    <Field
-                        name="password"
-                        label="Password"
-                        placeholder="It should be correct"
-                        type="password"
-                        component={inputField}
-                    />
-                    <LoadingButton loading={loading} pristine={pristine} />
-                </Form>
-            </Fragment>
-        );
-    }
-}
-
-Login = reduxForm({
-    form: "login",
-    validate
-})(Login);
+const Login = ({ onSubmit, formError, classes }) => {
+    return (
+        <Formik
+            onSubmit={onSubmit}
+            initialValues={{
+                email: "",
+                password: ""
+            }}
+            render={({ handleSubmit, dirty, ...props }) => {
+                return (
+                    <Fragment>
+                        <ErrorPaper
+                            error={formError}
+                            classes={{
+                                root: classes.errorPaper
+                            }}
+                        />
+                        <form onSubmit={handleSubmit} noValidate>
+                            <Field
+                                name="email"
+                                label="Email"
+                                placeholder="johndoe@email.com"
+                                type="email"
+                                component={_inputField}
+                            />
+                            <Field
+                                name="password"
+                                label="Password"
+                                placeholder="It should be correct"
+                                type="password"
+                                component={_inputField}
+                            />
+                            <LoadingButton pristine={!dirty}>
+                                Login
+                            </LoadingButton>
+                        </form>
+                    </Fragment>
+                );
+            }}
+        />
+    );
+};
 
 export default withStyles(styles)(Login);

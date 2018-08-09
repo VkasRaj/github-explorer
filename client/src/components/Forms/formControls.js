@@ -22,6 +22,25 @@ export const inputField = ({ input, meta: { error, touched }, ...field }) => {
     );
 };
 
+export const _inputField = ({
+    field, // { name, value, onChange, onBlur }
+    form: { touched, errors }, // also values, setXXXX, handleXXXX, dirty, isValid, status, etc.
+    ...props
+}) => {
+    const error = errors[field.name];
+    return (
+        <TextField
+            margin="normal"
+            error={touched && error ? true : false}
+            helperText={touched && error ? error : null}
+            InputLabelProps={{ shrink: true }}
+            fullWidth
+            {...field}
+            {...props}
+        />
+    );
+};
+
 export const ErrorPaper = ({ error, ...props }) => {
     return error ? (
         <Paper square={true} {...props} elevation={0}>
@@ -32,7 +51,7 @@ export const ErrorPaper = ({ error, ...props }) => {
     ) : null;
 };
 
-export const LoadingButton = ({ loading, pristine }) => {
+export const LoadingButton = ({ loading, pristine, children, ...props }) => {
     return (
         <FormControl margin="normal" fullWidth>
             <Button
@@ -40,11 +59,12 @@ export const LoadingButton = ({ loading, pristine }) => {
                 type="Submit"
                 color="primary"
                 disabled={pristine || loading}
+                {...props}
             >
                 {loading ? (
                     <CircularProgress size={20} thickness={4} />
                 ) : (
-                    "Login"
+                    children
                 )}
             </Button>
         </FormControl>
