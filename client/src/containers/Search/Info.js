@@ -87,13 +87,11 @@ class Info extends Component {
                         </ListItem>
                     </List>
                 </Dialog>
-                {lastSearchDialog && (
-                    <LastSearchList
-                        open={lastSearchDialog}
-                        close={closeLastSearch}
-                        searchList={lastSearch}
-                    />
-                )}
+                <LastSearchList
+                    open={lastSearchDialog}
+                    close={closeLastSearch}
+                    searchList={lastSearch}
+                />
             </Fragment>
         );
     }
