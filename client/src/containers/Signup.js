@@ -11,7 +11,7 @@ class Signup extends Component {
         error: null
     };
 
-    onSignUp = values => {
+    onSignUp = (values, actions) => {
         this.setState({ error: null });
         axios
             .post("/api/user/signup", values)
@@ -20,6 +20,7 @@ class Signup extends Component {
             })
             .catch(({ response: { data: { error } } }) => {
                 this.setState({ error });
+                actions.setSubmitting(false);
             });
     };
 

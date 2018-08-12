@@ -16,7 +16,7 @@ class Login extends PureComponent {
                 validateOnBlur={false}
                 validateOnChange={false}
                 initialValues={{ email: "", password: "" }}
-                render={({ handleSubmit, dirty, ...props }) => {
+                render={({ handleSubmit, dirty, isSubmitting, ...props }) => {
                     return (
                         <Fragment>
                             <form onSubmit={handleSubmit} noValidate>
@@ -34,7 +34,10 @@ class Login extends PureComponent {
                                     type="password"
                                     component={InputField}
                                 />
-                                <LoadingButton disabled={!dirty}>
+                                <LoadingButton
+                                    loading={isSubmitting}
+                                    disabled={!dirty || isSubmitting}
+                                >
                                     Login
                                 </LoadingButton>
                             </form>

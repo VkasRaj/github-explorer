@@ -10,7 +10,7 @@ class Login extends Component {
         error: null
     };
 
-    onLogin = values => {
+    onLogin = (values, actions) => {
         const {
             state: { error },
             props: { userLogin }
@@ -20,6 +20,7 @@ class Login extends Component {
 
         userLogin(values, error => {
             error && this.setState({ error });
+            actions.setSubmitting(false);
         });
     };
 

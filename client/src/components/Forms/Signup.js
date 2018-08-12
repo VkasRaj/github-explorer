@@ -19,7 +19,7 @@ class Signup extends PureComponent {
                     email: "",
                     password: ""
                 }}
-                render={({ handleSubmit, dirty, ...props }) => {
+                render={({ handleSubmit, dirty, isSubmitting, ...props }) => {
                     return (
                         <Fragment>
                             <form onSubmit={handleSubmit} noValidate>
@@ -44,7 +44,10 @@ class Signup extends PureComponent {
                                     type="password"
                                     component={InputField}
                                 />
-                                <LoadingButton disabled={!dirty}>
+                                <LoadingButton
+                                    loading={isSubmitting}
+                                    disabled={!dirty || isSubmitting}
+                                >
                                     Signup
                                 </LoadingButton>
                             </form>
