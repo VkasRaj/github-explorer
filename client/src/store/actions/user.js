@@ -14,23 +14,6 @@ const userSuccess = user => ({ type: USER_SUCCESS, user });
 
 const userLogout = () => ({ type: USER_LOGOUT });
 
-export const signup = (values, cb) => {
-    return dispatch => {
-        dispatch(userStart());
-        axios
-            .post("/api/user/signup", values)
-            .then(() => {
-                dispatch(userSuccess(null));
-                if (cb) {
-                    cb();
-                }
-            })
-            .catch(({ response: { data: { error } } }) => {
-                dispatch(userFail({ signup: error }));
-            });
-    };
-};
-
 export const login = (values, cb) => {
     return dispatch => {
         dispatch(userStart());

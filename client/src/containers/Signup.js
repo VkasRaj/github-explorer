@@ -1,28 +1,31 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
 import Redirect from "react-router-dom/Redirect";
+import axios from "axios";
 
 import SignupForm from "../components/Forms/Signup";
-import { signup } from "../store/actions";
 
 class Signup extends Component {
     state = {
-        redirectLogin: false
+        redirectLogin: false,
+        error: null
     };
 
     onSignUp = values => {
-        const { userSignUp } = this.props;
-
-        userSignUp(values, () => {
-            this.setState({ redirectLogin: true });
-        });
+        this.setState({ error: null });
+        axios
+            .post("/api/user/signup", values)
+            .then(() => {
+                this.setState({ redirectLogin: true });
+            })
+            .catch(({ response: { data: { error } } }) => {
+                this.setState({ error });
+            });
     };
 
     render() {
         const {
             onSignUp,
-            state: { redirectLogin },
-            props: { error }
+            state: { redirectLogin, error }
         } = this;
 
         return redirectLogin ? (
@@ -33,15 +36,4 @@ class Signup extends Component {
     }
 }
 
-const mapStateToProps = state => ({
-    error: state.user.error.signup
-});
-
-const mapDispatchToProps = dispatch => ({
-    userSignUp: (v, cb) => dispatch(signup(v, cb))
-});
-
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(Signup);
+export default Signup;
