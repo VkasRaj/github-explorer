@@ -37,7 +37,7 @@ export const autoSignIn = cb => {
         axios
             .get("/api/user/authenticate")
             .then(({ data: { user } }) => {
-                dispatch(userSuccess(user));
+                user && dispatch(userSuccess(user));
                 cb && cb(null, user);
             })
             .catch(({ response: { data: { error } } }) => {
