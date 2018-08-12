@@ -18,9 +18,9 @@ class Login extends Component {
 
         error && this.setState({ error: null });
 
-        userLogin(values, error => {
+        userLogin(values, (error, user) => {
             error && this.setState({ error });
-            actions.setSubmitting(false);
+            !user && actions.setSubmitting(false);
         });
     };
 
