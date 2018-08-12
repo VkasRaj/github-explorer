@@ -1,14 +1,5 @@
 import axios from "axios";
-import {
-    USER_START,
-    USER_SUCCESS,
-    USER_FAIL,
-    USER_LOGOUT
-} from "./actionTypes";
-
-const userStart = () => ({ type: USER_START });
-
-const userFail = error => ({ type: USER_FAIL, error });
+import { USER_SUCCESS, USER_LOGOUT } from "./actionTypes";
 
 const userSuccess = user => ({ type: USER_SUCCESS, user });
 
@@ -16,17 +7,14 @@ const userLogout = () => ({ type: USER_LOGOUT });
 
 export const login = (values, cb) => {
     return dispatch => {
-        dispatch(userStart());
         axios
             .post("/api/user/login", values)
             .then(({ data: { user } }) => {
                 dispatch(userSuccess(user));
-                if (cb) {
-                    cb(user);
-                }
+                cb && cb(null, user);
             })
             .catch(({ response: { data: { error } } }) => {
-                dispatch(userFail({ login: error }));
+                cb && cb(error, null);
             });
     };
 };
@@ -38,25 +26,22 @@ export const logout = () => {
             .then(() => {
                 dispatch(userLogout());
             })
-            .catch(error => {
-                dispatch(userFail(error));
+            .catch(({ response: { data: { error } } }) => {
+                throw error;
             });
     };
 };
 
 export const autoSignIn = cb => {
     return dispatch => {
-        dispatch(userStart());
         axios
             .get("/api/user/authenticate")
             .then(({ data: { user } }) => {
                 dispatch(userSuccess(user));
-                if (cb) {
-                    cb(user);
-                }
+                cb && cb(null, user);
             })
-            .catch(error => {
-                dispatch(userFail(error));
+            .catch(({ response: { data: { error } } }) => {
+                cb && cb(error, null);
             });
     };
 };
