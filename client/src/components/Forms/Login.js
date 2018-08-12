@@ -34,7 +34,7 @@ class Login extends PureComponent {
                                     type="password"
                                     component={InputField}
                                 />
-                                <LoadingButton pristine={!dirty}>
+                                <LoadingButton disabled={!dirty}>
                                     Login
                                 </LoadingButton>
                             </form>
