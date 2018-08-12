@@ -1,24 +1,53 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
+import Typography from "@material-ui/core/Typography";
 
 import SearchForm from "../../components/Forms/Search";
 import { search } from "../../store/actions";
 
 class Search extends Component {
+    state = { error: null };
+
     onSearch = values => {
-        const { githubSearch } = this.props;
-        githubSearch(values);
+        const {
+            props: { githubSearch },
+            state: { error }
+        } = this;
+
+        error && this.setState({ error: null });
+
+        githubSearch(values, error => {
+            this.setState({ error });
+        });
     };
 
     render() {
-        const { onSearch } = this;
+        const {
+            onSearch,
+            state: { error }
+        } = this;
 
-        return <SearchForm onSubmit={onSearch} />;
+        return (
+            <Fragment>
+                <SearchForm onSubmit={onSearch} />
+
+                {error && (
+                    <Typography
+                        paragraph
+                        align="center"
+                        variant="body2"
+                        color="error"
+                    >
+                        {error}
+                    </Typography>
+                )}
+            </Fragment>
+        );
     }
 }
 
 const mapDispatchToProps = dispatch => ({
-    githubSearch: v => dispatch(search(v))
+    githubSearch: (v, cb) => dispatch(search(v, cb))
 });
 
 export default connect(
