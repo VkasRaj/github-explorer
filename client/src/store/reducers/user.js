@@ -4,7 +4,7 @@ const initState = {
     user: null
 };
 
-const userSuccess = (state, { user }) => ({ ...state, loading: false, user });
+const userSuccess = (state, { user }) => ({ ...state, user });
 
 const userLogout = (state, action) => ({ user: null });
 
