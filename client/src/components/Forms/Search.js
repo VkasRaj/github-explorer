@@ -1,10 +1,10 @@
 import React, { Fragment, PureComponent } from "react";
 import { Formik, Field } from "formik";
-import IconButton from "@material-ui/core/IconButton";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import SearchIcon from "@material-ui/icons/SearchOutlined";
 
 import InputField from "./FormControls/InputField";
+import LoadingIconButton from "./FormControls/LoadingIconButton";
 
 class Search extends PureComponent {
     render() {
@@ -16,7 +16,7 @@ class Search extends PureComponent {
                 initialValues={{
                     search: ""
                 }}
-                render={({ handleSubmit, dirty, ...props }) => {
+                render={({ handleSubmit, dirty, isSubmitting, ...props }) => {
                     return (
                         <Fragment>
                             <form onSubmit={handleSubmit} noValidate>
@@ -29,13 +29,16 @@ class Search extends PureComponent {
                                     InputProps={{
                                         endAdornment: (
                                             <InputAdornment position="end">
-                                                <IconButton
-                                                    disabled={!dirty}
+                                                <LoadingIconButton
                                                     color="primary"
                                                     type="submit"
+                                                    disabled={
+                                                        !dirty || isSubmitting
+                                                    }
+                                                    loading={isSubmitting}
                                                 >
                                                     <SearchIcon />
-                                                </IconButton>
+                                                </LoadingIconButton>
                                             </InputAdornment>
                                         )
                                     }}

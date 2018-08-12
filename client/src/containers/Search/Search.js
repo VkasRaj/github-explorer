@@ -8,7 +8,7 @@ import { search } from "../../store/actions";
 class Search extends Component {
     state = { error: null };
 
-    onSearch = values => {
+    onSearch = (values, actions) => {
         const {
             props: { githubSearch },
             state: { error }
@@ -18,6 +18,7 @@ class Search extends Component {
 
         githubSearch(values, error => {
             this.setState({ error });
+            actions.setSubmitting(false);
         });
     };
 
