@@ -1,7 +1,8 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 
 import LoginForm from "../components/Forms/Login";
+import ErrorPaper from "../components/Forms/FormControls/ErrorPaper";
 import { login } from "../store/actions";
 
 class Login extends Component {
@@ -27,7 +28,12 @@ class Login extends Component {
             onLogin,
             state: { error }
         } = this;
-        return <LoginForm onSubmit={onLogin} formError={error} />;
+        return (
+            <Fragment>
+                <ErrorPaper error={error} />
+                <LoginForm onSubmit={onLogin} />
+            </Fragment>
+        );
     }
 }
 
