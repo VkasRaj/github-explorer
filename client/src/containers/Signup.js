@@ -1,8 +1,9 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import Redirect from "react-router-dom/Redirect";
 import axios from "axios";
 
 import SignupForm from "../components/Forms/Signup";
+import ErrorPaper from "../components/Forms/FormControls/ErrorPaper";
 
 class Signup extends Component {
     state = {
@@ -31,7 +32,10 @@ class Signup extends Component {
         return redirectLogin ? (
             <Redirect to="/login" />
         ) : (
-            <SignupForm onSubmit={onSignUp} formError={error} />
+            <Fragment>
+                <ErrorPaper error={error} />
+                <SignupForm onSubmit={onSignUp} />
+            </Fragment>
         );
     }
 }
