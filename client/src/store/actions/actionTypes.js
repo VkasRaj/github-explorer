@@ -6,3 +6,5 @@ export const USER_AUTO_SIGNIN = "USER_AUTO_SIGNIN";
 
 export const FETCH_REPO_SUCCESS = "FETCH_REPO_SUCCESS";
 export const FETCH_SEARCH_LIST = "FETCH_SEARCH_LIST";
+export const FETCH_SEARCH = "FETCH_SEARCH";
+export const FETCH_LIST = "FETCH_LIST";

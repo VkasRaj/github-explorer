@@ -1,34 +1,18 @@
-import axios from "axios";
+import {
+    FETCH_REPO_SUCCESS,
+    FETCH_SEARCH_LIST,
+    FETCH_SEARCH,
+    FETCH_LIST
+} from "./actionTypes";
 
-import { FETCH_REPO_SUCCESS, FETCH_SEARCH_LIST } from "./actionTypes";
+/* For Sagas */
 
-const repoSuccess = repos => ({ type: FETCH_REPO_SUCCESS, repos });
+export const search = ({ search }, cb) => ({ type: FETCH_SEARCH, search, cb });
 
-const searchList = list => ({ type: FETCH_SEARCH_LIST, list });
+export const onSearchList = () => ({ type: FETCH_LIST });
 
-export const search = ({ search }, cb) => {
-    return dispatch => {
-        axios
-            .post("/api/user/search", { search })
-            .then(({ data: { items } }) => {
-                dispatch(repoSuccess(items));
-                cb && cb(null, items);
-            })
-            .catch(error => {
-                cb && cb("Oopps.. Something went wrong", null);
-            });
-    };
-};
+/* For Reducers */
 
-export const onSearchList = () => {
-    return dispatch => {
-        axios
-            .get("/api/user/search")
-            .then(({ data: { result } }) => {
-                dispatch(searchList(result));
-            })
-            .catch(error => {
-                throw error;
-            });
-    };
-};
+export const repoSuccess = repos => ({ type: FETCH_REPO_SUCCESS, repos });
+
+export const searchList = list => ({ type: FETCH_SEARCH_LIST, list });

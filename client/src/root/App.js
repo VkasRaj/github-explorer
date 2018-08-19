@@ -12,7 +12,7 @@ import grey from "@material-ui/core/colors/grey";
 
 import reducers from "../store/reducers/index";
 import Routes from "./Routes/Routes";
-import { watchSagas } from "../store/sagas/index";
+import { watchUserSaga, watchSearchSaga } from "../store/sagas/index";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -25,7 +25,8 @@ const STORE = createStore(
     composeEnhancers(applyMiddleware(thunk, SAGA))
 );
 
-SAGA.run(watchSagas);
+SAGA.run(watchUserSaga);
+SAGA.run(watchSearchSaga);
 
 const THEME = createMuiTheme({
     overrides: {
