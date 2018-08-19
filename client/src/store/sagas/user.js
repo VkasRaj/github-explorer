@@ -1,9 +1,14 @@
 import axios from "axios";
-import { put } from "redux-saga/effects";
+import { put, takeEvery, takeLatest, all } from "redux-saga/effects";
 
+import {
+    USER_LOGIN,
+    USER_LOGOUT,
+    USER_AUTO_SIGNIN
+} from "../actions/actionTypes";
 import { userSuccess, userLogout } from "../actions/user";
 
-export function* login({ values, cb }) {
+function* login({ values, cb }) {
     try {
         const {
             data: { user }
@@ -19,7 +24,7 @@ export function* login({ values, cb }) {
     }
 }
 
-export function* logout() {
+function* logout() {
     try {
         yield axios.get("/api/user/logout");
         yield put(userLogout());
@@ -32,7 +37,7 @@ export function* logout() {
     }
 }
 
-export function* autoSignIn({ cb }) {
+function* autoSignIn({ cb }) {
     try {
         const {
             data: { user }
@@ -46,4 +51,12 @@ export function* autoSignIn({ cb }) {
     }) {
         cb && cb(error, null);
     }
+}
+
+export function* watchUserSagas() {
+    yield all([
+        takeLatest(USER_LOGIN, login),
+        takeLatest(USER_LOGOUT, logout),
+        takeEvery(USER_AUTO_SIGNIN, autoSignIn)
+    ]);
 }
