@@ -3,6 +3,8 @@ import BrowserRouter from "react-router-dom/BrowserRouter";
 import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import { Provider } from "react-redux";
 import thunk from "redux-thunk";
+import createSagaMiddleware from "redux-saga";
+
 import MuiThemeProvider from "@material-ui/core/styles/MuiThemeProvider";
 import createMuiTheme from "@material-ui/core/styles/createMuiTheme";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -10,12 +12,20 @@ import grey from "@material-ui/core/colors/grey";
 
 import reducers from "../store/reducers/index";
 import Routes from "./Routes/Routes";
+import { watchSagas } from "../store/sagas/index";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const REDUCER = combineReducers(reducers);
 
-const STORE = createStore(REDUCER, composeEnhancers(applyMiddleware(thunk)));
+const SAGA = createSagaMiddleware();
+
+const STORE = createStore(
+    REDUCER,
+    composeEnhancers(applyMiddleware(thunk, SAGA))
+);
+
+SAGA.run(watchSagas);
 
 const THEME = createMuiTheme({
     overrides: {
