@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import BrowserRouter from "react-router-dom/BrowserRouter";
 import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import { Provider } from "react-redux";
-import thunk from "redux-thunk";
 import createSagaMiddleware from "redux-saga";
 
 import MuiThemeProvider from "@material-ui/core/styles/MuiThemeProvider";
@@ -20,10 +19,7 @@ const REDUCER = combineReducers(reducers);
 
 const SAGA = createSagaMiddleware();
 
-const STORE = createStore(
-    REDUCER,
-    composeEnhancers(applyMiddleware(thunk, SAGA))
-);
+const STORE = createStore(REDUCER, composeEnhancers(applyMiddleware(SAGA)));
 
 SAGA.run(watchUserSaga);
 SAGA.run(watchSearchSaga);
